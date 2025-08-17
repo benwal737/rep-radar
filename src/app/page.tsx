@@ -1,15 +1,14 @@
 import React from "react";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 const Home = () => {
   return (
-    <div>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+    <div className="flex h-screen items-center justify-center">
+      <form action="/sign-in">
+        <Button
+          type="submit"
+        >Get Started</Button>
+      </form>
     </div>
   );
 };
