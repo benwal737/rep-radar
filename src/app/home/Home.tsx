@@ -1,12 +1,14 @@
 import React from "react";
-import TopBar from "@/components/TopBar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 const Home = () => {
   return (
-    <div>
-      <TopBar />
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-2xl font-bold">Home</div>
+    <div className="flex h-screen items-center justify-center">
+      <div>
+        <SidebarProvider>
+          <AppSidebar />
+        </SidebarProvider>
       </div>
     </div>
   );
