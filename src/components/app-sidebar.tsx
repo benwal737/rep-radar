@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -9,10 +11,11 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
+import { useRouter } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
-import Link from "next/link";
 
 export function AppSidebar() {
+  const router = useRouter();
   return (
     <Sidebar>
       <SidebarHeader>
@@ -20,10 +23,11 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton>Workouts</SidebarMenuButton>
+              <SidebarMenuButton onClick={() => router.push("/workouts")}>
+                Workouts
+              </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton>Exercises</SidebarMenuButton>
@@ -32,11 +36,18 @@ export function AppSidebar() {
               <SidebarMenuButton>Progress</SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton>Settings</SidebarMenuButton>
+              <SidebarMenuButton onClick={() => router.push("/account")}>
+                Account
+              </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarGroup>
+          <UserButton userProfileMode="navigation" userProfileUrl="/account" />
+        </SidebarGroup>
+      </SidebarFooter>
     </Sidebar>
   );
 }
