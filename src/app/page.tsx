@@ -27,7 +27,7 @@ export default function page() {
           <div
             className="absolute inset-0 rounded-full animate-spin"
             style={{
-              background: `conic-gradient(from 0deg, transparent 0deg, rgba(34, 197, 94, 0.2) 30deg, rgba(34, 197, 94, 0.2) 60deg, rgba(34, 197, 94, 0.8) 90deg, transparent 120deg, transparent 360deg)`,
+              background: `conic-gradient(from 0deg, transparent 0deg, rgba(255, 255, 255, 0.05) 30deg, rgba(255, 255, 255, 0.1) 60deg, rgba(255, 255, 255, 0.1) 90deg, transparent 120deg, transparent 360deg, transparent 360deg)`,
               animationDuration: "4s",
             }}
           ></div>
@@ -38,7 +38,7 @@ export default function page() {
           <div
             className="absolute inset-0 rounded-full animate-spin"
             style={{
-              background: `conic-gradient(from 180deg, transparent 0deg, rgba(34, 197, 94, 0.1) 45deg, rgba(34, 197, 94, 0.2) 90deg, transparent 135deg, transparent 360deg)`,
+              background: `conic-gradient(from 180deg, transparent 0deg, rgba(255, 255, 255, 0.05) 45deg, rgba(255, 255, 255, 0.1) 90deg, transparent 135deg, transparent 360deg)`,
               animationDuration: "6s",
             }}
           ></div>
@@ -49,7 +49,7 @@ export default function page() {
       <div className="relative z-10 text-center space-y-8">
         <div className="space-y-4">
           <h1 className="text-6xl md:text-8xl font-bold text-white tracking-tight">
-            Rep <span className="text-green-400">Radar</span>
+            Rep <span className="text-primary">Radar</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-md mx-auto">
             Track your workouts with precision
@@ -59,7 +59,7 @@ export default function page() {
           <Button
             type="submit"
             size="lg"
-            className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+            className="bg-primary px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
           >
             Get Started
           </Button>
