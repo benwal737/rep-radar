@@ -2,8 +2,7 @@
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { UserProfile, SignOutButton } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
+import { UserProfile } from "@clerk/nextjs";
 
 const Account = () => {
   return (

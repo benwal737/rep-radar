@@ -5,7 +5,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
@@ -13,13 +12,17 @@ import {
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "./theme-toggle";
 
 export function AppSidebar() {
   const router = useRouter();
   return (
     <Sidebar>
       <SidebarHeader>
-        <div className="text-2xl font-bold">Rep Radar</div>
+        <div className="flex items-center justify-between">
+          <div className="text-2xl font-bold">Rep Radar</div>
+          <ModeToggle />
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -44,9 +47,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarGroup>
-          <UserButton userProfileMode="navigation" userProfileUrl="/account" />
-        </SidebarGroup>
+        <UserButton userProfileMode="navigation" userProfileUrl="/account" />
       </SidebarFooter>
     </Sidebar>
   );
