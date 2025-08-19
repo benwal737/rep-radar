@@ -75,10 +75,10 @@ export default function Templates({
           <div className="flex justify-between items-center mb-8">
             <div>
               <h1 className="text-3xl font-bold text-foreground">
-                {user?.firstName}'s Workouts
+                {user?.firstName}'s Templates
               </h1>
               <p className="text-muted-foreground mt-2">
-                Manage and track your workout routines
+                Manage and track your workout templates
               </p>
             </div>
 
@@ -86,22 +86,22 @@ export default function Templates({
               <DialogTrigger asChild>
                 <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
                   <Plus className="w-4 h-4 mr-2" />
-                  Add Workout
+                  Add Template
                 </Button>
               </DialogTrigger>
               <DialogContent className="bg-card border-border">
                 <DialogHeader>
                   <DialogTitle className="text-card-foreground">
-                    Create New Workout
+                    Create New Template
                   </DialogTitle>
                   <DialogDescription className="text-muted-foreground">
-                    Add a new workout routine to your collection
+                    Add a new template to your collection
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4">
                   <div>
                     <Label htmlFor="name" className="text-card-foreground">
-                      Workout Name
+                      Template Name
                     </Label>
                     <Input
                       id="name"
@@ -126,7 +126,7 @@ export default function Templates({
                       onClick={() => {}}
                       className="bg-primary text-primary-foreground hover:bg-primary/90"
                     >
-                      Create Workout
+                      Create Template
                     </Button>
                   </div>
                 </div>
@@ -134,7 +134,7 @@ export default function Templates({
             </Dialog>
           </div>
 
-          {/* Workouts Grid */}
+          {/* Templates Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {templates.map((template) => (
               <Card
@@ -170,7 +170,7 @@ export default function Templates({
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {/* Workout Info */}
+                    {/* Template Info */}
                     <div className="flex justify-between items-center">
                       <div className="flex space-x-2">
                         {template.categories.map((category) => (
@@ -211,10 +211,10 @@ export default function Templates({
             <DialogContent className="bg-card border-border">
               <DialogHeader>
                 <DialogTitle className="text-card-foreground">
-                  Edit Workout
+                  Edit Template
                 </DialogTitle>
                 <DialogDescription className="text-muted-foreground">
-                  Modify your workout routine
+                  Modify your workout template
                 </DialogDescription>
               </DialogHeader>
               {/* {editingWorkout && (
