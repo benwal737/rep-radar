@@ -1,7 +1,5 @@
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
 }
 
 datasource db {
@@ -9,8 +7,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id String @id @default(cuid())
-  email String @unique
+model Session {
+  id         String    @id @default(cuid())
+  user       String
+  template   Template  @relation(fields: [templateId], references: [id])
+  templateId String
+  startedAt  DateTime  @default(now())
+  endedAt    DateTime?
+  completed  Boolean   @default(false)
+  duration   String?
 }
 
+model Template {
+  id             String          @id @default(cuid())
+  user           String
+  name           String
+  categories     String[]
+  exerciseBlocks ExerciseBlock[]
+  sessions       Session[]
+}
+
+model ExerciseBlock {
+  id         String   @id @default(cuid())
+  template   Template @relation(fields: [templateId], references: [id])
+  templateId String
+  sets       Set[]
+}
+
+model Exercise {
+  id         String   @id @default(cuid())
+  name       String
+  categories String[]
+  unit       String
+  sets       Set[]
+}
+
+model Set {
+  id              String         @id @default(cuid())
+  exercise        Exercise       @relation(fields: [exerciseId], references: [id])
+  exerciseId      String
+  exerciseBlock   ExerciseBlock? @relation(fields: [exerciseBlockId], references: [id])
+  exerciseBlockId String
+  reps            String?
+  weight          String?
+  duration        String?
+  distance        String?
+  completed       Boolean        @default(false)
+}
