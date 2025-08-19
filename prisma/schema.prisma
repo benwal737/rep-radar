@@ -38,7 +38,6 @@ model Exercise {
   id         String   @id @default(cuid())
   name       String
   categories String[]
-  unit       String
   sets       Set[]
 }
 
@@ -48,9 +47,7 @@ model Set {
   exerciseId      String
   exerciseBlock   ExerciseBlock? @relation(fields: [exerciseBlockId], references: [id])
   exerciseBlockId String
-  reps            String?
-  weight          String?
-  duration        String?
-  distance        String?
+  reps            Float
+  weight          Float
   completed       Boolean        @default(false)
 }

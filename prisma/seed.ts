@@ -5,94 +5,158 @@ const prisma = new PrismaClient();
 type SeedExercise = {
   name: string;
   categories: string[];
-  unit: string; // "weight" | "duration" | etc (you use string)
   sets: Array<{
-    reps?: string;
-    weight?: string;
-    duration?: string;
-    distance?: string;
+    reps: number;
+    weight: number;
   }>;
 };
 
-const PUSH_EXERCISES: SeedExercise[] = [
+const pushExercises: SeedExercise[] = [
   {
     name: "Bench Press",
     categories: ["Chest", "Triceps"],
-    unit: "weight",
-    sets: [{ reps: "8-10" }, { reps: "8-10" }, { reps: "6-8" }],
+    sets: [
+      { reps: 8, weight: 100 },
+      { reps: 8, weight: 100 },
+      { reps: 6, weight: 100 },
+    ],
   },
   {
     name: "Incline Dumbbell Bench",
     categories: ["Upper Chest", "Shoulders"],
-    unit: "weight",
-    sets: [{ reps: "10-12" }, { reps: "10-12" }, { reps: "8-10" }],
+    sets: [
+      { reps: 10, weight: 100 },
+      { reps: 10, weight: 100 },
+      { reps: 8, weight: 100 },
+    ],
   },
   {
     name: "Pec Deck",
     categories: ["Chest"],
-    unit: "weight",
-    sets: [{ reps: "12-15" }, { reps: "12-15" }],
+    sets: [
+      { reps: 12, weight: 100 },
+      { reps: 12, weight: 100 },
+    ],
   },
   {
     name: "Overhead Triceps Extension",
     categories: ["Triceps"],
-    unit: "weight",
-    sets: [{ reps: "10-12" }, { reps: "10-12" }],
+    sets: [
+      { reps: 10, weight: 100 },
+      { reps: 10, weight: 100 },
+    ],
   },
   {
     name: "Cable Lateral Raise",
     categories: ["Shoulders"],
-    unit: "weight",
-    sets: [{ reps: "12-15" }, { reps: "12-15" }],
+    sets: [
+      { reps: 12, weight: 100 },
+      { reps: 12, weight: 100 },
+    ],
   },
 ];
 
-const PULL_EXERCISES: SeedExercise[] = [
+const pullExercises: SeedExercise[] = [
   {
     name: "Lat Pulldown",
     categories: ["Back", "Lats"],
-    unit: "weight",
-    sets: [{ reps: "8-12" }, { reps: "8-12" }, { reps: "8-12" }],
+    sets: [
+      { reps: 8, weight: 100 },
+      { reps: 8, weight: 100 },
+      { reps: 8, weight: 100 },
+    ],
   },
   {
     name: "Seated Row",
     categories: ["Back", "Upper Back"],
-    unit: "weight",
-    sets: [{ reps: "10-12" }, { reps: "10-12" }, { reps: "8-10" }],
+    sets: [
+      { reps: 10, weight: 100 },
+      { reps: 10, weight: 100 },
+      { reps: 8, weight: 100 },
+    ],
   },
   {
     name: "Rear Delt Cable Pull",
     categories: ["Shoulders", "Rear Delts"],
-    unit: "weight",
-    sets: [{ reps: "12-15" }, { reps: "12-15" }],
+    sets: [
+      { reps: 12, weight: 100 },
+      { reps: 12, weight: 100 },
+    ],
   },
   {
     name: "Incline Dumbbell Curl",
     categories: ["Biceps"],
-    unit: "weight",
-    sets: [{ reps: "10-12" }, { reps: "10-12" }],
+    sets: [
+      { reps: 10, weight: 100 },
+      { reps: 10, weight: 100 },
+    ],
   },
   {
     name: "Cable Curl",
     categories: ["Biceps"],
-    unit: "weight",
-    sets: [{ reps: "12-15" }, { reps: "12-15" }],
+    sets: [
+      { reps: 12, weight: 100 },
+      { reps: 12, weight: 100 },
+    ],
   },
 ];
 
-async function ensureExercise(
-  name: string,
-  categories: string[],
-  unit: string
-) {
+const legExercises: SeedExercise[] = [
+  {
+    name: "Leg Press",
+    categories: ["Quads", "Hamstrings", "Glutes"],
+    sets: [
+      { reps: 8, weight: 100 },
+      { reps: 8, weight: 100 },
+      { reps: 6, weight: 100 },
+    ],
+  },
+  {
+    name: "Leg Extension",
+    categories: ["Quads"],
+    sets: [
+      { reps: 8, weight: 100 },
+      { reps: 8, weight: 100 },
+      { reps: 6, weight: 100 },
+    ],
+  },
+  {
+    name: "Hamstring Curl",
+    categories: ["Hamstrings", "Glutes"],
+    sets: [
+      { reps: 8, weight: 100 },
+      { reps: 8, weight: 100 },
+      { reps: 6, weight: 100 },
+    ],
+  },
+  {
+    name: "Calf Raise",
+    categories: ["Calves"],
+    sets: [
+      { reps: 12, weight: 100 },
+      { reps: 12, weight: 100 },
+    ],
+  },
+  {
+    name: "Thigh Abduction Machine",
+    categories: ["Quads", "Hamstrings", "Glutes"],
+    sets: [
+      { reps: 8, weight: 100 },
+      { reps: 8, weight: 100 },
+      { reps: 6, weight: 100 },
+    ],
+  },
+];
+
+async function ensureExercise(name: string, categories: string[]) {
   const existing = await prisma.exercise.findFirst({
-    where: { name, unit },
+    where: { name },
     select: { id: true },
   });
   if (existing) return existing.id;
 
   const created = await prisma.exercise.create({
-    data: { name, categories, unit },
+    data: { name, categories },
     select: { id: true },
   });
   return created.id;
@@ -111,7 +175,7 @@ async function createTemplateWithBlocks(
 
   // For each exercise: create one block and many sets pointing to the same exercise
   for (const ex of exercises) {
-    const exerciseId = await ensureExercise(ex.name, ex.categories, ex.unit);
+    const exerciseId = await ensureExercise(ex.name, ex.categories);
 
     await prisma.exerciseBlock.create({
       data: {
@@ -121,8 +185,6 @@ async function createTemplateWithBlocks(
             exercise: { connect: { id: exerciseId } },
             reps: s.reps,
             weight: s.weight,
-            duration: s.duration,
-            distance: s.distance,
           })),
         },
       },
@@ -140,8 +202,9 @@ async function main() {
 
   const USER = "user_31OWXw942AZpADAqcy8gryMwa8w";
 
-  await createTemplateWithBlocks(USER, "Push", PUSH_EXERCISES);
-  await createTemplateWithBlocks(USER, "Pull", PULL_EXERCISES);
+  await createTemplateWithBlocks(USER, "Push", pushExercises);
+  await createTemplateWithBlocks(USER, "Pull", pullExercises);
+  await createTemplateWithBlocks(USER, "Legs", legExercises);
 
   console.log("Seed complete.");
 }

@@ -11,8 +11,10 @@ import {
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
-import { UserButton } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
 import { ModeToggle } from "./theme-toggle";
+import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
 
 export function AppSidebar() {
   const router = useRouter();
@@ -47,7 +49,12 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <UserButton userProfileMode="navigation" userProfileUrl="/account" />
+        {/* <UserButton userProfileMode="navigation" userProfileUrl="/account" /> */}
+        <SignOutButton>
+          <Button variant="outline" size="icon">
+            <LogOut className="size-4" />
+          </Button>
+        </SignOutButton>
       </SidebarFooter>
     </Sidebar>
   );
