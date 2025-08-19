@@ -28,8 +28,8 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton onClick={() => router.push("/workouts")}>
-                Workouts
+              <SidebarMenuButton onClick={() => router.push("/templates")}>
+                Templates
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
