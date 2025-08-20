@@ -5,14 +5,12 @@ export async function POST(req: NextRequest) {
   try {
     const evt = await verifyWebhook(req);
 
-    // Do something with payload
-    // For this guide, log payload to console
     const { id } = evt.data;
+    if (!id) throw new Error("No user ID found in webhook payload");
     const eventType = evt.type;
-    console.log(
-      `Received webhook with ID ${id} and event type of ${eventType}`
-    );
-    console.log("Webhook payload:", evt.data);
+    if (eventType === "user.created") {
+      console.log("User created:", id);
+    }
 
     return new Response("Webhook received", { status: 200 });
   } catch (err) {

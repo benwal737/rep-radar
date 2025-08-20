@@ -28,11 +28,11 @@ import { useUser } from "@clerk/nextjs";
 import { Template } from "./types";
 
 export default function Templates({
-  allWorkouts,
+  userTemplates,
 }: {
-  allWorkouts: Template[];
+  userTemplates: Template[];
 }) {
-  const [templates, setTemplates] = useState<Template[]>(allWorkouts);
+  const [templates, setTemplates] = useState<Template[]>(userTemplates);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const { user } = useUser();
@@ -65,6 +65,8 @@ export default function Templates({
     setEditingWorkout({ ...workout });
     setIsEditDialogOpen(true);
   };
+
+  console.log(templates[0]);
 
   return (
     <SidebarProvider>
@@ -133,7 +135,11 @@ export default function Templates({
               </DialogContent>
             </Dialog>
           </div>
-
+          {templates.length === 0 && (
+            <p className="text-muted-foreground text-center">
+              Loading templates...
+            </p>
+          )}
           {/* Templates Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {templates.map((template) => (
@@ -188,7 +194,7 @@ export default function Templates({
                     {/* Exercises Preview */}
                     <div>
                       <h4 className="text-sm font-medium text-card-foreground mb-2">
-                        Exercises ({template.exerciseBlocks?.length})
+                        Exercises ({template.exerciseBlocks.length})
                       </h4>
                     </div>
 

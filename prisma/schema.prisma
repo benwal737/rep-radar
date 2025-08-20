@@ -25,6 +25,9 @@ model Template {
   categories     String[]
   exerciseBlocks ExerciseBlock[]
   sessions       Session[]
+
+  @@unique([user, name], name: "user_name")
+  @@index([user], map: "Template_user_idx")
 }
 
 model ExerciseBlock {
@@ -36,9 +39,13 @@ model ExerciseBlock {
 
 model Exercise {
   id         String   @id @default(cuid())
+  user       String
   name       String
   categories String[]
   sets       Set[]
+
+  @@unique([user, name], name: "exercise_user_name")
+  @@index([user], map: "Exercise_user_idx")
 }
 
 model Set {

@@ -20,16 +20,27 @@ export interface Template {
 
 export interface ExerciseBlock {
   id: string;
-  template: string;
+  template: Template;
+  templateId: string;
+  sets: Set[];
+}
+
+export interface NewExerciseBlock {
   templateId: string;
   sets: Set[];
 }
 
 export interface Exercise {
   id: string;
+  user: string;
   name: string;
   categories: string[];
   sets: Set[];
+}
+
+export interface NewExercise {
+  name: string;
+  categories: string[];
 }
 
 export interface Set {
