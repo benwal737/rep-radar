@@ -19,7 +19,7 @@ import { LogOut } from "lucide-react";
 export function AppSidebar() {
   const router = useRouter();
   return (
-    <Sidebar>
+    <Sidebar className="w-52">
       <SidebarHeader>
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold">Rep Radar</div>

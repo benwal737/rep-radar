@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,12 +13,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
-import { Trash2, Edit, Play, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { useUser } from "@clerk/nextjs";
 import { Template } from "./types";
+import TemplateList from "./TemplateList";
 
 export default function Templates({
   userTemplates,
@@ -74,7 +73,7 @@ export default function Templates({
                 {user?.firstName}'s Templates
               </h1>
               <p className="text-muted-foreground mt-2">
-                Manage and track your workout templates
+                Manage your workout templates or start a new session!
               </p>
             </div>
 
@@ -134,77 +133,12 @@ export default function Templates({
               Loading templates...
             </p>
           )}
-          {/* Templates Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {templates.map((template) => (
-              <Card
-                key={template.id}
-                className="bg-card border-border hover:shadow-lg transition-shadow"
-              >
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-card-foreground">
-                        {template.name}
-                      </CardTitle>
-                    </div>
-                    <div className="flex space-x-1">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => openEditDialog(template)}
-                        className="text-muted-foreground hover:text-foreground"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleDeleteWorkout(template.id)}
-                        className="text-muted-foreground hover:text-destructive"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {/* Template Info */}
-                    <div className="flex justify-between items-center">
-                      <div className="flex space-x-2">
-                        {template.categories.map((category) => (
-                          <Badge
-                            key={category}
-                            variant="secondary"
-                            className="bg-secondary text-secondary-foreground"
-                          >
-                            {category}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Exercises Preview */}
-                    <div>
-                      <h4 className="text-sm font-medium text-card-foreground mb-2">
-                        Exercises ({template.exerciseBlocks.length})
-                      </h4>
-                    </div>
-
-                    {/* Start Workout Button */}
-                    <Button
-                      onClick={() => handleStartWorkout(template)}
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                    >
-                      <Play className="w-4 h-4 mr-2" />
-                      Start Workout
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <TemplateList
+            templates={templates}
+            handleDeleteWorkout={handleDeleteWorkout}
+            openEditDialog={openEditDialog}
+            handleStartWorkout={handleStartWorkout}
+          />
 
           {/* Edit Dialog */}
           <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
