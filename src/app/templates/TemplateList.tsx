@@ -34,7 +34,7 @@ const TemplateList = ({
                 <Button
                   variant="ghost"
                   onClick={() => openEditDialog(template)}
-                  className="text-muted-foreground hover:text-foreground size-5"
+                  className="size-5 text-muted-foreground hover:text-card-foreground"
                 >
                   <Edit className="size-4" />
                 </Button>

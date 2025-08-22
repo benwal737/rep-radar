@@ -19,6 +19,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { useUser } from "@clerk/nextjs";
 import { Template } from "./types";
 import TemplateList from "./TemplateList";
+import CreateTemplateForm from "./CreateTemplateForm";
 
 export default function Templates({
   userTemplates,
@@ -80,7 +81,7 @@ export default function Templates({
             <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
               <DialogTrigger asChild>
                 <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  <Plus className="w-4 h-4 mr-2" />
+                  <Plus className="w-4 h-4" />
                   Add Template
                 </Button>
               </DialogTrigger>
@@ -93,38 +94,7 @@ export default function Templates({
                     Add a new template to your collection
                   </DialogDescription>
                 </DialogHeader>
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="name" className="text-card-foreground">
-                      Template Name
-                    </Label>
-                    <Input
-                      id="name"
-                      value={newWorkout.name || ""}
-                      onChange={(e) =>
-                        setNewWorkout({ ...newWorkout, name: e.target.value })
-                      }
-                      className="bg-input border-border text-foreground"
-                      placeholder="e.g., Upper Body Strength"
-                    />
-                  </div>
-                  <div></div>
-                  <div className="flex justify-end space-x-2">
-                    <Button
-                      variant="outline"
-                      onClick={() => setIsAddDialogOpen(false)}
-                      className="border-border text-foreground"
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      onClick={() => {}}
-                      className="bg-primary text-primary-foreground hover:bg-primary/90"
-                    >
-                      Create Template
-                    </Button>
-                  </div>
-                </div>
+                <CreateTemplateForm />  
               </DialogContent>
             </Dialog>
           </div>

@@ -9,6 +9,13 @@ export interface Session {
   duration: string;
 }
 
+export interface NewTemplate {
+  user: string;
+  name: string;
+  categories: string[];
+  exerciseBlocks: NewExerciseBlock[];
+}
+
 export interface Template {
   id: string;
   user: string;
